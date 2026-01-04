@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center"> view</h1><hr>
+<table class="table table-striped-columns" style="background-color: blueviolet;border-color: black;border: width 2cm;height: 400px;width: 700px;margin-left: 340px;border: 2px solid black;">
+  <tr>
+    <th style="background-color: blueviolet;">Name</th>
+    <th style="background-color: blueviolet;">Email</th>
+    <th style="background-color: blueviolet;">course</th>
+        
+<th style="background-color: blueviolet;">Join Date</th>
+
+  </tr>
+  {% for student in stu %}
+  <tr>
+    <td >{{ student.name }}</td>
+    <td>{{ student.email }}</td>
+        <td>{{ student.course }}</td>
+
+<td>{{ student.join_date }}</td>
+
+   <td>
+  <a href="{% url 'update' student.id %}" class="btn btn-success btn-sm">
+    Update
+  </a>
+<br><br>
+
+  <a href="{% url 'delete' student.id %}" class="btn btn-danger btn-sm">
+    Delete
+  </a>
+</td>
+
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

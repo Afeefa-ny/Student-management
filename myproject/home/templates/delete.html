@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center">Delete</h1>
+<hr>
+
+<div class="container"
+     style="background: linear-gradient(blueviolet,darkgray);
+            height: 400px;
+            width: 500px;
+            padding: 30px;
+            border: 2px solid black;">
+
+  <p>
+    <strong>
+      {{ stu.name }} <br>
+      {{ stu.email }} <br>
+      {{ stu.course }} <br>
+      {{ stu.join_date }}
+    </strong>
+  </p>
+
+  <br>
+
+  <form method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger btn-sm">
+      Yes, Delete
+    </button>
+
+    <a href="{% url 'view' %}" class="btn btn-light btn-sm">
+      Cancel
+    </a>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}<h1 class="text-center">Update</h1><hr>
+<div class="container" style="background: linear-gradient(blueviolet,darkgray);height: 400px;width: 500px;padding-top: 30px;padding-right: 60px;border: 2px solid black;">
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+</form>
+</div>
+{% endblock %}
