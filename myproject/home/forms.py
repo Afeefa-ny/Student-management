@@ -1,15 +1,11 @@
 from django import forms
-from .models import Student
-
-
-class DateInput(forms.DateInput):
-    input_type = 'date'
-
+from .models import Employee
 
 class AddForm(forms.ModelForm):
     class Meta:
-        model = Student
+        model = Employee
         fields = '__all__'
+
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -19,17 +15,19 @@ class AddForm(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Enter email'
             }),
-            'course': forms.TextInput(attrs={
+            'role': forms.TextInput(attrs={  
                 'class': 'form-control',
-                'placeholder': 'Enter course'
+                'placeholder': 'Enter role'
             }),
-            'join_date': DateInput(attrs={
-                'class': 'form-control'
+            'department': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter department'
             }),
         }
+
         labels = {
             'name': 'Name',
             'email': 'Email',
-            'course': 'Course',
-            'join_date': 'Join Date',
+            'role': 'Role',              
+            'department': 'Department',   
         }

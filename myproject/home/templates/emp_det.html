@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="text-center">Employee Details</h2>
+<hr>
+
+<div class="container"
+     style="background: linear-gradient(lightblue,white);
+            width: 500px;
+            padding: 30px;
+            border: 2px solid black;">
+
+    <p><strong>Name:</strong> {{ emp.name }}</p>
+    <p><strong>Email:</strong> {{ emp.email }}</p>
+    <p><strong>Role:</strong> {{ emp.role }}</p>
+    <p><strong>Department:</strong> {{ emp.department }}</p>
+
+    <br>
+
+    <a href="{% url 'delete' emp.id %}" class="btn btn-danger btn-sm">
+        Delete
+    </a>
+
+    <a href="{% url 'view' %}" class="btn btn-secondary btn-sm">
+        Back
+    </a>
+
+</div>
+{% endblock %}

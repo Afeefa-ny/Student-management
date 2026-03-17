@@ -1,28 +1,48 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Student
-from .forms import AddForm
+from .models import Employee
+from .forms import AddForm   
+
 def update(request, id):
-    student = get_object_or_404(Student, id=id)
+    emp = get_object_or_404(Employee, id=id)   
 
     if request.method == 'POST':
-        form = AddForm(request.POST, instance=student)
+        form = AddForm(request.POST, instance=emp)
         if form.is_valid():
             form.save()
             return redirect('view')
     else:
-        form = AddForm(instance=student)
+        form = AddForm(instance=emp)
 
     return render(request, 'update.html', {'form': form})
 
 def view(request):
-    stu = Student.objects.all()
-    return render(request, 'view.html', {'stu': stu})
+    query = request.GET.get('q')
+    
+    if query:
+        emp = Employee.objects.filter(name__icontains=query)
+        
+    else:
+        emp = Employee.objects.all()
 
+    return render(request, 'view.html', {'emp': emp})
+
+def list(request):
+    emp=Employee.objects.all()
+    return render(request, 'list.html', {'emp': emp})
+def detail(request, id):
+    emp = get_object_or_404(Employee, id=id)
+    return render(request, 'detail.html', {'emp': emp})
 def home(request):
-    return render(request, 'home.html')
+    emp = Employee.objects.all()  
+    return render(request, 'home.html', {'employee': emp})
+from django.shortcuts import render, get_object_or_404
+from .models import Employee
+
 
 def base(request):
     return render(request, 'base.html')
+
+
 
 def add(request):
     if request.method == "POST":
@@ -35,9 +55,10 @@ def add(request):
 
     return render(request, 'add.html', {'form': form})
 
+
 def delete(request, id):
-    stu = get_object_or_404(Student, id=id)
+    emp = get_object_or_404(Employee, id=id)
     if request.method == 'POST':
-        stu.delete()
+        emp.delete()
         return redirect('view')
-    return render(request, 'delete.html', {'stu': stu})
+    return render(request, 'delete.html', {'emp': emp})
